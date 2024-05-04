@@ -13,6 +13,7 @@ io.on("connection", (socket) => {
     })
 
     socket.on('sdp-offer',(data)=>{
+
         io.emit('sdp-offer',data)
     })
 
@@ -24,7 +25,6 @@ io.on("connection", (socket) => {
 
     
     socket.on('sdp_answer',(data)=>{
-        if(data.ice_candidate?.candidate ==null)return
         io.emit("sdp_answer",JSON.stringify(data))
     })
 
