@@ -3,13 +3,16 @@ const {Server} = require("socket.io")
 const io = new Server(3000, { /* options */ });
 
 io.on("connection", (socket) => {
-    // console.log(socket)
     socket.on('msg',(data)=>{
         console.log("pod cast admin has joined the party")
     })
     socket.on("join-pod",(data)=>{
         console.log("about to join pod")
         io.emit('pod-join-request',data)
+    })
+    socket.on('close',(data)=>{
+        console.log(`user ${data} want to close connection`)
+        io.emit('close',data)
     })
 
     socket.on('sdp-offer',(data)=>{
