@@ -11,6 +11,10 @@ io.on("connection", (socket) => {
         console.log("about to join pod")
         io.emit('pod-join-request',data)
     })
+    socket.on('close',(data)=>{
+        console.log(`user ${data} want to close connection`)
+        io.emit('close',data)
+    })
 
     socket.on('sdp-offer',(data)=>{
         io.emit('sdp-offer',data)
